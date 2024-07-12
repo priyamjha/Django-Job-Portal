@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6" >
+        <div class="card mx-auto" style="width: 40rem">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Create A Company</h5>
+            <form method="POST">
+                {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Company Name</label>
+                        {% render_field form.name class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Year Established</label>
+                        {% render_field form.est_date class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">City</label>
+                        {% render_field form.city class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">State</label>
+                        {% render_field form.state class="form-control" %}
+                    </div>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

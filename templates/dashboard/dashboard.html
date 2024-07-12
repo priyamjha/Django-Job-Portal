@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+{% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any resume. Create one from <a href="{% url 'update-resume' %}">here</a></b>
+</div>
+{% endif %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to Django Jobs</h1>
+        <p class="col-md-8 fs-4">Applicant Dashboard</p>
+    </div>
+</div>
+
+{% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+    You have not added a company. Please add one to create job ads. <a href="{% url 'update-company' %}">Add a
+        Company</a>
+</div>
+{% endif %}
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any company. Create one from <a href="{%url 'update-company' %}">here</a></b>
+</div>
+{% endif %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to Django Jobs</h1>
+        <p class="col-md-8 fs-4">Recruiter Dashboard</p>
+    </div>
+</div>
+
+{% endif %}
+
+
+
+
+
+{% endblock content %}

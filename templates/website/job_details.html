@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="display-5 fw-bold">{{job.title}}</h2>
+            <p class="col-md-8 fs-5 mt-3">
+                {{job.state}} | Remote | {{job.salary|intcomma}}
+            </p>
+            {% if has_applied == False %}
+            <a href="{% url 'apply-to-job' job.pk %}" class="btn btn-primary btn-lg">Apply Now</a>
+            {% else %}
+            <p><span class="text-success">Already Applied</span></p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<div>
+    <section>
+        <h5>Job Description</h5>
+        <p>{{job.requirements}}</p>
+    </section>
+</div>
+<br>
+<div>
+    <section>
+        <h5>Ideal Candidate</h5>
+        <p>{{job.ideal_candidate}}</p>
+    </section>
+</div>
+<br>
+
+<hr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Other Details</h5>
+                <p class="card-text">
+                    Welcome to Django Job Portal! Search and get your dream job. We have thousands of job offerings for you.
+                    Don't forget to leave a like when you gett a job. Goodluck With you job hunt!
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">About the Comapnay</h5>
+                <p class="card-text">Company Name: {{job.company.name}}</p>
+                <p class="card-text">Company Location: {{job.company.city}}, {{job.company.state}}</p>
+                <p class="card-text">Year Establish: {{job.company.est_date}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Related Jobs</h5>
+                <p class="card-text">
+                    Welcome to Django Job Portal! Search and get your dream job. We have thousands of job offerings for you.
+                    Don't forget to leave a like when you gett a job. Goodluck With you job hunt!
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Created {{job.timestamp|naturaltime}}</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}

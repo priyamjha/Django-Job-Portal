@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+    <section>
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h2 class="display-4 fw-bold">Django Jobs. Get Hired Quickly!</h2>
+
+                <div class="card">
+                    <div class="card-body">
+                        <form class="row gy-2 gx-3 align-items-center" method="GET">
+                            <div class="col-sm-2">
+                                <label for="autoSizingInput">Name</label>
+                                {% render_field filter.form.title class="form-control" id="autoSizingInput" placeholder="Job Keyword" %}
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="autoSizingInput">Select Location</label>
+                                {% render_field filter.form.state class="form-select" %}
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="autoSizingInput">Choose Job Type</label>
+                                {% render_field filter.form.job_type class="form-select" %}
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="autoSizingInput">Select Industry</label>
+                                {% render_field filter.form.industry class="form-select" %}
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <p class="col-md-8 fs-6 mt-3">
+                    Welcome to Django Job Portal! Search and get your dream job. We have thousands of job offerings for you.
+                    Don't forget to leave a like when you gett a job. Goodluck With you job hunt!
+                </p>
+                <a class="btn btn-outline-primary" href="{% url 'job-listing' %}">More Jobs</a>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for job in filter.qs %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="col-md-8 fs-6 mt-3">Industry: {{job.industry}}</p>
+                    <p class="col-md-8 fs-6 mt-3">Job Type: {{job.job_type}}</p>
+                    <p class="col-md-8 fs-6 mt-3">Location: {{job.city}}, {{job.state}}</p>
+                    <p class="col-md-8 fs-6 mt-3">Salary: {{job.salary}}</p>
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'job-details' job.pk %}">View Details</a>
+                    {% else %}
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}">View Details</a>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{job.timestamp|naturaltime}}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto col-lg-2 mt-4">
+            <nav aris-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">1</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a href="#" class="page-link">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+{% endblock content %}
