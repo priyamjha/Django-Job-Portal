@@ -120,24 +120,15 @@ django_job_portal/
    ```
    cd django-job-portal
    ```
-3. Create a virtual environment and activate it:
-   ```
-   python -m venv env
-   source env/bin/activate  # On Windows, use `env\Scripts\activate`
-   ```
-4. Install the dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-5. Apply the migrations:
+3. Apply the migrations:
    ```
    python manage.py migrate
    ```
-6. Create a superuser to access the admin panel:
+4. Create a superuser to access the admin panel:
    ```
    python manage.py createsuperuser
    ```
-7. Run the development server:
+5. Run the development server:
    ```
    python manage.py runserver
    ```
